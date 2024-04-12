@@ -76,6 +76,29 @@ document.querySelector(".nav__links").addEventListener("click", function (e) {
   }
 });
 
+// Building a Tabbed component
+const tabs = document.querySelectorAll(".operations__tab");
+const container = document.querySelector(".operations__tab-container");
+const content = document.querySelectorAll(".operations__content");
+
+container.addEventListener("click", (e) => {
+  const clicked = e.target.closest(".operations__tab");
+
+  console.log(clicked);
+  if (!clicked) return;
+  tabs.forEach((t) => {
+    t.classList.remove("operations__tab--active");
+  });
+  content.forEach((c) => {
+    c.classList.remove("operations__content--active");
+  });
+  clicked.classList.add("operations__tab--active");
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add("operations__content--active");
+
+  console.log(clicked.dataset.tab);
+});
 // DOM traversing
 const h1 = document.querySelector("h1");
 // going downwards : child
