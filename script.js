@@ -9,6 +9,7 @@ const btnCloseModal = document.querySelector(".btn--close-modal");
 const btnsOpenModal = document.querySelectorAll(".btn--show-modal");
 const btnScroll = document.querySelector(".btn--scroll-to");
 const section1 = document.querySelector("#section--1");
+const nav = document.querySelector(".nav");
 
 const openModal = function (e) {
   e.preventDefault();
@@ -99,6 +100,29 @@ container.addEventListener("click", (e) => {
 
   console.log(clicked.dataset.tab);
 });
+// Passing arguements to event handlers
+nav.addEventListener("mouseover", (e) => {
+  if (e.target.classList.contains("nav__link")) {
+    const link = e.target;
+    const siblings = link.closest(".nav").querySelectorAll(".nav__link");
+    const logo = link.closest(".nav").querySelector("img");
+    siblings.forEach((el) => {
+      if (el !== link) el.style.opacity = 0.5;
+      logo.style.opacity = 0.5;
+    });
+  }
+});
+nav.addEventListener("mouseout", (e) => {
+  if (e.target.classList.contains("nav__link")) {
+    const link = e.target;
+    const siblings = link.closest(".nav").querySelectorAll(".nav__link");
+    const logo = link.closest(".nav").querySelector("img");
+    siblings.forEach((el) => {
+      if (el !== link) el.style.opacity = 1;
+      logo.style.opacity = 1;
+    });
+  }
+});
 // DOM traversing
 const h1 = document.querySelector("h1");
 // going downwards : child
@@ -110,7 +134,7 @@ h1.lastElementChild.style.color = "orangered";
 // going upwards : parent
 console.log(h1.parentNode);
 console.log(h1.parentElement);
-h1.closest(".header").style.background = "var(--gradient-secondary)";
+// h1.closest(".header").style.background = "var(--gradient-secondary)";
 // going sideways: siblings
 console.log(h1.previousElementSibling);
 console.log(h1.nextElementSibling);
