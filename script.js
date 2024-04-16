@@ -36,6 +36,7 @@ document.addEventListener("keydown", function (e) {
 // Smooth Scrolling
 
 btnScroll.addEventListener("click", function (e) {
+  // Method # 1 (practice purpose)
   // const getCords = section1.getBoundingClientRect();
   // console.log(getCords);
   // console.log(e.target.getBoundingClientRect());
@@ -101,28 +102,28 @@ container.addEventListener("click", (e) => {
   console.log(clicked.dataset.tab);
 });
 // Passing arguements to event handlers
-nav.addEventListener("mouseover", (e) => {
+const handlerfunc = function (e, opacity) {
   if (e.target.classList.contains("nav__link")) {
     const link = e.target;
     const siblings = link.closest(".nav").querySelectorAll(".nav__link");
     const logo = link.closest(".nav").querySelector("img");
     siblings.forEach((el) => {
-      if (el !== link) el.style.opacity = 0.5;
-      logo.style.opacity = 0.5;
+      if (el !== link) el.style.opacity = opacity;
     });
+    logo.style.opacity = opacity;
   }
+};
+
+nav.addEventListener("mouseover", function (e) {
+  handlerfunc(e, 0.5);
 });
-nav.addEventListener("mouseout", (e) => {
-  if (e.target.classList.contains("nav__link")) {
-    const link = e.target;
-    const siblings = link.closest(".nav").querySelectorAll(".nav__link");
-    const logo = link.closest(".nav").querySelector("img");
-    siblings.forEach((el) => {
-      if (el !== link) el.style.opacity = 1;
-      logo.style.opacity = 1;
-    });
-  }
+nav.addEventListener("mouseout", function (e) {
+  handlerfunc(e, 1);
 });
+// 2nd method
+// nav.addEventListener("mouseover", handlerfunc.bind(0.5));
+// nav.addEventListener("mouseout", handlerfunc.bind(1));
+
 // DOM traversing
 const h1 = document.querySelector("h1");
 // going downwards : child
@@ -135,77 +136,9 @@ h1.lastElementChild.style.color = "orangered";
 console.log(h1.parentNode);
 console.log(h1.parentElement);
 // h1.closest(".header").style.background = "var(--gradient-secondary)";
+
 // going sideways: siblings
 console.log(h1.previousElementSibling);
 console.log(h1.nextElementSibling);
 console.log(h1.previousSibling);
 console.log(h1.nextSibling);
-// capturing and bubbling phase
-
-// const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
-
-// const randomNum = () =>
-//   `rgb(${randInt(0, 255)},${randInt(0, 255)},${randInt(0, 255)})`;
-
-// console.log(randomNum(0, 255));
-
-// document.querySelector(".nav__link").addEventListener("click", function (e) {
-//   this.style.backgroundColor = randomNum();
-//   console.log("LINK", e.target, e.currentTarget);
-//   // e.stopPropagation();
-// });
-
-// document.querySelector(".nav__links").addEventListener("click", function (e) {
-//   this.style.backgroundColor = randomNum();
-//   console.log("CONTAINER", e.target, e.currentTarget);
-// });
-// document.querySelector(".nav").addEventListener("click", function (e) {
-//   this.style.backgroundColor = randomNum();
-//   console.log("NAV", e.target, e.currentTarget);
-// });
-
-// console.log(document.documentElement);
-// console.log(document.head);
-// console.log(document.body);
-// const header = document.querySelector(".header");
-// const allSections = document.querySelectorAll(".section");
-// console.log(allSections);
-// document.querySelector("section--1");
-// const allButtons = document.getElementsByTagName("button");
-// console.log(allButtons);
-
-// creating
-// const message = document.createElement("div");
-// message.classList.add("cookie-message");
-// message.innerHTML =
-//   'we use cookies for different purpose <button class="btn"> Got it </button>';
-// // header.append(message);
-// header.prepend(message);
-
-// // header.append(message);
-// header.append(message.cloneNode(true));
-// // header.after(message);
-// const btn = document.querySelector(".btn");
-// btn.addEventListener("click", function () {
-//   message.remove();
-// });
-// //styles
-// message.style.backgroundColor = "red";
-// message.style.width = "120%";
-// console.log(message.style.height);
-// console.log(message.style.color);
-// console.log(message.style.backgroundColor);
-// console.log(getComputedStyle(message).height);
-// // attributes
-// document.documentElement.style.setProperty("--color-primary", "orangered");
-// console.log(logo.src);
-// console.log(logo.getAttribute("src"));
-// console.log(logo.alt);
-// logo.alt = "new logo";
-// console.log(logo.designer);
-// console.log(logo.getAttribute("designer"));
-// logo.setAttribute("new", "one");
-// const linkCheck = document.querySelector(".nav__link");
-// console.log(linkCheck.href);
-// console.log(linkCheck.getAttribute("href"));
-// console.log(logo.dataset.versionNumber);
